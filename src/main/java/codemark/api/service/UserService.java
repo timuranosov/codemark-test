@@ -24,6 +24,10 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
+    public void truncate() {
+        userRepository.deleteAll();
+    }
+
     public List<User> getAll() {
         return (List<User>) userRepository.findAll();
     }
@@ -37,6 +41,7 @@ public class UserService {
         Optional<User> optional = userRepository.findById(user.getId());
         if (optional.isPresent()) {
             User entity = optional.get();
+            entity.setName(user.getName());
             entity.setLogin(user.getLogin());
             entity.setPassword(user.getPassword());
             entity.setRoles(user.getRoles());
