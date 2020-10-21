@@ -4,7 +4,6 @@ import codemark.test.api.dto.UserDTO;
 import codemark.test.db.entity.User;
 import codemark.test.service.UserService;
 import codemark.test.utils.DTOUtils;
-import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,26 +40,26 @@ public class UserController {
     @RequestMapping(value = "/add", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity<Object> addUser(@Valid @RequestBody UserDTO userDTO) {
         userService.add(userDTO);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return ResponseEntity.ok(returnSuccess());
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE, produces = "application/json")
     public ResponseEntity<Object> deleteUser(@PathVariable long id) {
         userService.delete(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return ResponseEntity.ok(returnSuccess());
     }
 
     @RequestMapping(value = "/modify", method = RequestMethod.PUT, produces = "application/json")
     public ResponseEntity<Object> deleteUser(@Valid @RequestBody UserDTO userDTO) {
         userService.updateUser(DTOUtils.toEntity(userDTO));
-        return new ResponseEntity<>(HttpStatus.OK);
+        return ResponseEntity.ok(returnSuccess());
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Map<String, Object> handleValidationExceptions(MethodArgumentNotValidException ex) {
         Map<String, Object> response = new HashMap<>();
-        response.put("success", "false");
+        response.put("success", false);
         Map<String, String> errors = new HashMap<>();
         ex.getBindingResult().getAllErrors().forEach((error) -> {
             String fieldName = ((FieldError) error).getField();
@@ -68,6 +67,12 @@ public class UserController {
             errors.put(fieldName, errorMessage);
         });
         response.put("errors", errors);
+        return response;
+    }
+
+    private Map<String, Object> returnSuccess() {
+        Map<String, Object> response = new HashMap<>();
+        response.put("success", true);
         return response;
     }
 }
