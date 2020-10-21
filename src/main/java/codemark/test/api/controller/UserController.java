@@ -4,15 +4,16 @@ import codemark.test.api.dto.UserDTO;
 import codemark.test.db.entity.User;
 import codemark.test.service.UserService;
 import codemark.test.utils.DTOUtils;
+import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 @RestController
 @RequestMapping("/v1/users")
@@ -50,8 +51,23 @@ public class UserController {
     }
 
     @RequestMapping(value = "/modify", method = RequestMethod.PUT, produces = "application/json")
-    public ResponseEntity<Object> deleteUser(@RequestBody UserDTO userDTO) {
+    public ResponseEntity<Object> deleteUser(@Valid @RequestBody UserDTO userDTO) {
         userService.updateUser(DTOUtils.toEntity(userDTO));
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public Map<String, Object> handleValidationExceptions(MethodArgumentNotValidException ex) {
+        Map<String, Object> response = new HashMap<>();
+        response.put("success", "false");
+        Map<String, String> errors = new HashMap<>();
+        ex.getBindingResult().getAllErrors().forEach((error) -> {
+            String fieldName = ((FieldError) error).getField();
+            String errorMessage = error.getDefaultMessage();
+            errors.put(fieldName, errorMessage);
+        });
+        response.put("errors", errors);
+        return response;
     }
 }

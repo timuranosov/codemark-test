@@ -13,6 +13,7 @@ public class DTOUtils {
         UserDTO userDTO = new UserDTO();
 
         userDTO.setId(user.getId());
+        userDTO.setName(user.getName());
         userDTO.setLogin(user.getLogin());
         userDTO.setPassword(user.getPassword());
         userDTO.setRoles(toDTO(user.getRoles()));
@@ -24,6 +25,7 @@ public class DTOUtils {
         User entity = new User();
 
         entity.setId(userDTO.getId());
+        entity.setName(userDTO.getName());
         entity.setLogin(userDTO.getLogin());
         entity.setPassword(userDTO.getPassword());
         entity.setRoles(toEntity(userDTO.getRoles()));
