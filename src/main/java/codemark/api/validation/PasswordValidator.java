@@ -1,4 +1,4 @@
-package codemark.test.validation;
+package codemark.api.validation;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

@@ -1,4 +1,4 @@
-package codemark.test.api.dto;
+package codemark.api.dto;
 
 public class RoleDTO {
     private Long id;

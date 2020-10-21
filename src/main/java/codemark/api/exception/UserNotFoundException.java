@@ -1,4 +1,4 @@
-package codemark.test.exception;
+package codemark.api.exception;
 
 public class UserNotFoundException extends RuntimeException {
     public UserNotFoundException(String message) {

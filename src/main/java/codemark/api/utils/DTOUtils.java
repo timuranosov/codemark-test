@@ -1,9 +1,9 @@
-package codemark.test.utils;
+package codemark.api.utils;
 
-import codemark.test.api.dto.RoleDTO;
-import codemark.test.api.dto.UserDTO;
-import codemark.test.db.entity.Role;
-import codemark.test.db.entity.User;
+import codemark.api.dto.RoleDTO;
+import codemark.api.dto.UserDTO;
+import codemark.api.db.entity.Role;
+import codemark.api.db.entity.User;
 
 import java.util.Set;
 import java.util.stream.Collectors;

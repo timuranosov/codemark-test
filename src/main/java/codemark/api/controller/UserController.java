@@ -1,9 +1,9 @@
-package codemark.test.api.controller;
+package codemark.api.controller;
 
-import codemark.test.api.dto.UserDTO;
-import codemark.test.db.entity.User;
-import codemark.test.service.UserService;
-import codemark.test.utils.DTOUtils;
+import codemark.api.dto.UserDTO;
+import codemark.api.db.entity.User;
+import codemark.api.service.UserService;
+import codemark.api.utils.DTOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -50,7 +50,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/modify", method = RequestMethod.PUT, produces = "application/json")
-    public ResponseEntity<Object> deleteUser(@Valid @RequestBody UserDTO userDTO) {
+    public ResponseEntity<Object> modifyUser(@Valid @RequestBody UserDTO userDTO) {
         userService.updateUser(DTOUtils.toEntity(userDTO));
         return ResponseEntity.ok(returnSuccess());
     }

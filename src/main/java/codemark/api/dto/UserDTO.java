@@ -1,6 +1,6 @@
-package codemark.test.api.dto;
+package codemark.api.dto;
 
-import codemark.test.validation.PasswordConstraint;
+import codemark.api.validation.PasswordConstraint;
 
 import javax.validation.constraints.NotBlank;
 import java.util.Set;

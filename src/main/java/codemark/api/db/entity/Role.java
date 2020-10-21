@@ -1,4 +1,4 @@
-package codemark.test.db.entity;
+package codemark.api.db.entity;
 
 import javax.persistence.*;
 import java.util.Set;

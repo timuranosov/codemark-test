@@ -1,10 +1,10 @@
-package codemark.test.service;
+package codemark.api.service;
 
-import codemark.test.api.dto.UserDTO;
-import codemark.test.db.entity.User;
-import codemark.test.db.repository.UserRepository;
-import codemark.test.exception.UserNotFoundException;
-import codemark.test.utils.DTOUtils;
+import codemark.api.dto.UserDTO;
+import codemark.api.db.entity.User;
+import codemark.api.db.repository.UserRepository;
+import codemark.api.exception.UserNotFoundException;
+import codemark.api.utils.DTOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
